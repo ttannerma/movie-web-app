@@ -1,0 +1,24 @@
+{
+  "name": "movie-web-app",
+  "version": "1.0.0",
+  "description": "View details about movies. This app is a demonstration of skill.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ttannerma/movie-web-app.git"
+  },
+  "keywords": [
+    "movie",
+    "react",
+    "typescript"
+  ],
+  "author": "Teemu Tannerma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ttannerma/movie-web-app/issues"
+  },
+  "homepage": "https://github.com/ttannerma/movie-web-app#readme"
+}
