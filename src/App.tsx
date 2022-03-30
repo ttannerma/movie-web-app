@@ -1,10 +1,7 @@
-import React from "react";
-import { useGetAllMoviesQuery } from "services/api";
+import Layout from "components/Layout";
 
 function App() {
-  const { data, error, isLoading } = useGetAllMoviesQuery({});
-  console.log(data, error, isLoading);
-  return <div>test</div>;
+  return <Layout />;
 }
 
 export default App;

@@ -4,15 +4,26 @@ interface MovieQueryParams {
   index?: number;
 }
 
-export const movieApi = createApi({
+const movieApi = createApi({
   reducerPath: "movieApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080" }),
   endpoints: (builder) => ({
-    getAllMovies: builder.query<string, MovieQueryParams>({
+    getAllMovies: builder.query<State.Movie[], MovieQueryParams>({
       query: () => "/movies",
+    }),
+    addMovie: builder.mutation<any, State.Movie>({
+      query: (movie) => {
+        return {
+          url: "/movie",
+          method: "POST",
+          body: movie,
+        };
+      },
     }),
   }),
 });
 
-// Auto generate hooks based on endpoint name
-export const { useGetAllMoviesQuery } = movieApi;
+export default movieApi;
+
+// Export automatically generated queries or mutations.
+export const { useGetAllMoviesQuery, useAddMovieMutation } = movieApi;
