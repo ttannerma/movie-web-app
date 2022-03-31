@@ -3,6 +3,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import { Box, Button, TextField } from "@mui/material";
 import movieApi, { useAddMovieMutation } from "services/api";
+import { initialMovie } from "utils/movieUtils";
 
 const classes = {
   dialog: {
@@ -24,29 +25,18 @@ const classes = {
   },
 };
 
-const initialMovie: State.Movie = {
-  name: "",
-  year: 2022,
-  genres: [""],
-  ageLimit: 0,
-  rating: 0,
-  actors: [],
-  director: {
-    firstName: "",
-    lastName: "",
-  },
-  synopsis: "",
-};
-
 interface Props extends DialogProps {
   handleClose: () => void;
 }
 
 const NewMovieDialog: React.FC<Props> = (props: Props) => {
   const [newMovie, setNewMovie] = useState<State.Movie>(initialMovie);
-  const { handleClose } = props;
+  const { handleClose, ...rest } = props;
 
+  //  endpoint mutation hook that is used to add new movie
   const [addMovie] = useAddMovieMutation();
+
+  // endpoint query hook that refetches all movies
   const { refetch } = movieApi.endpoints.getAllMovies.useQuerySubscription({});
 
   const { dialog, dialogContent, saveButton } = classes;
@@ -69,11 +59,16 @@ const NewMovieDialog: React.FC<Props> = (props: Props) => {
 
       // Close modal
       handleClose();
-    } catch {}
+
+      // Reset modal state
+      setNewMovie(initialMovie);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
-    <Dialog sx={dialog} {...props}>
+    <Dialog sx={dialog} {...rest}>
       <DialogTitle>Add new movie</DialogTitle>
       <Box sx={dialogContent}>
         <TextField

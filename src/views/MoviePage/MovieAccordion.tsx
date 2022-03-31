@@ -12,35 +12,24 @@ const classes = {
       color: "gray",
     },
   },
-  grayAccordionSummary: {
-    "&.MuiAccordion-root": {
-      backgroundColor: "gray",
-    },
-  },
   text: {
     color: "common.black",
   },
-} as const;
+};
 
 interface Props {
   movie: State.Movie;
-  index: number;
 }
 
 const MovieAccordion: React.FC<Props> = (props: Props) => {
-  const { movie, index } = props;
+  const { movie } = props;
   const { name, year, synopsis } = movie;
 
-  const { accordion, grayAccordionSummary, text } = classes;
-
-  const useGrayColor = index % 2 === 0;
+  const { accordion, text } = classes;
 
   return (
     <Accordion sx={accordion}>
-      <AccordionSummary
-        sx={useGrayColor ? grayAccordionSummary : {}}
-        expandIcon={<ExpandMoreIcon />}
-      >
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>
           {name} | {year}
         </Typography>

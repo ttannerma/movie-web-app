@@ -17,7 +17,7 @@ const classes = {
     display: "flex",
     justifyContent: "center",
   },
-} as const;
+};
 
 const MoviePage: React.FC = () => {
   // Fetch all movies with getAllMovies RTK query hook
@@ -32,7 +32,7 @@ const MoviePage: React.FC = () => {
     <Box sx={wrapper}>
       {data && data.length > 0 ? (
         data.map((movie, i) => (
-          <MovieAccordion key={`movie_${i}`} movie={movie} index={i} />
+          <MovieAccordion key={`movie_${i}`} movie={movie} />
         ))
       ) : (
         <Typography variant="h5">No movies found</Typography>

@@ -1,16 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-interface MovieQueryParams {
-  index?: number;
-}
+const serverUrl = process.env.REACT_APP_SERVER_URL;
+const serverPort = process.env.REACT_APP_SERVER_PORT;
 
 const movieApi = createApi({
-  reducerPath: "movieApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `http://${serverUrl}:${serverPort}` }),
   endpoints: (builder) => ({
-    getAllMovies: builder.query<State.Movie[], MovieQueryParams>({
+    /** GET all movies */
+    getAllMovies: builder.query<State.Movie[], {}>({
       query: () => "/movies",
     }),
+
+    /** POST single movie */
     addMovie: builder.mutation<any, State.Movie>({
       query: (movie) => {
         return {
@@ -25,5 +26,5 @@ const movieApi = createApi({
 
 export default movieApi;
 
-// Export automatically generated queries or mutations.
+// Export auto-generated hooks
 export const { useGetAllMoviesQuery, useAddMovieMutation } = movieApi;
